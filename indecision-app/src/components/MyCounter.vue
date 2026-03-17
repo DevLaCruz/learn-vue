@@ -12,16 +12,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, toValue } from 'vue'
+import { ref, computed } from 'vue'
 
 interface Props {
   value: number
   text: string
 }
 
+// const props = defineProps({
+//   value: { type: Number, required: true },
+// })
 const props = defineProps<Props>()
 
-const counter = ref(props.value)
+const counter = ref(props.value ?? 5)
 const squareCounter = computed(() => counter.value * counter.value)
 
 // const addQuantity = () => {
