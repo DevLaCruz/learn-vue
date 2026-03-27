@@ -1,7 +1,7 @@
 <template>
   <section>
     <h3>Counter {{ counter }}</h3>
-    <h3>Square: {{ squareCounter }}</h3>
+    <h3 data-testid="square-label">Square: {{ squareCounter }}</h3>
     <!-- <h4>{{ text }}</h4> -->
 
     <div class="">
@@ -19,7 +19,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { counter, squareCounter } = useCounter(11)
+const { counter, squareCounter } = useCounter(props.value)
 
 // import { ref, computed } from 'vue'
 
