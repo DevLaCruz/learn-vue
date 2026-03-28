@@ -1,6 +1,5 @@
 <script setup lang="ts">
-
-import {ref} from "vue";
+import { ref } from 'vue'
 
 const emits = defineEmits<{
   sendMessage: [text: string]
@@ -14,8 +13,6 @@ const sendMessage = () => {
   message.value = ''
   console.log(message.value)
 }
-
-
 </script>
 
 <template>
@@ -29,6 +26,7 @@ const sendMessage = () => {
     />
     <button
       class="bg-blue-500 text-white rounded-full p-2 ml-2 hover:bg-blue-600 focus:outline-none"
+      @click="sendMessage"
     >
       <svg
         width="20px"
@@ -54,6 +52,4 @@ const sendMessage = () => {
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

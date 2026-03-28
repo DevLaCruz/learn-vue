@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 
-export const useCounter = (initialValue: number) => {
-  const counter = ref(initialValue)
+export const useCounter = (initialValue?: number) => {
+  const counter = ref(initialValue ?? 5)
 
   return {
     counter,
