@@ -19,10 +19,12 @@ watch(
     await nextTick() // Esperamos a que Vue dibuje el nuevo mensaje en el HTML
 
     // Hacemos el scroll hacia abajo
-    chatRef.value?.scrollTo({
-      top: chatRef.value.scrollHeight,
-      behavior: 'smooth',
-    })
+    if (chatRef.value && 'scrollTo' in chatRef.value) {
+      chatRef.value.scrollTo({
+        top: chatRef.value.scrollHeight,
+        behavior: 'smooth',
+      })
+    }
   },
 )
 </script>
