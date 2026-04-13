@@ -8,9 +8,15 @@ export const UsePokemonGame = () => {
   const pokemons = ref<Pokemon[]>([])
   const pokemonOptions = ref<Pokemon[]>([])
 
+  const randomPokemon = computed(
+    () => pokemonOptions.value[Math.floor(Math.random() * pokemonOptions.value.length)],
+  )
+
   const isLoading = computed(() => pokemons.value.length === 0)
+
   const getPokemons = async (): Promise<Pokemon[]> => {
     const response = await pokemonApi.get<PokemonListResponse>('/?limit=151')
+
     const pokemonsArray = response.data.results.map((pokemon) => {
       const urlParts = pokemon.url.split('/')
       const id = urlParts.at(-2) ?? 0
@@ -26,15 +32,21 @@ export const UsePokemonGame = () => {
 
   const getNextOptions = (howMany: number = 4) => {
     gameStatus.value = GameStatus.Playing
-    pokemonOptions.value.slice(0, howMany)
-    pokemons.value.slice(0, howMany)
+
+    // 1. Asignamos los primeros 'howMany' al arreglo de opciones
+    pokemonOptions.value = pokemons.value.slice(0, howMany)
+
+    // 2. Reasignamos el arreglo principal quitando los que ya usamos
+    pokemons.value = pokemons.value.slice(howMany)
   }
 
   onMounted(async () => {
-    const pokemons = await getPokemons()
-
+    // CORRECCIÓN: Asignamos a pokemons.value en lugar de crear una variable local
+    pokemons.value = await getPokemons()
     getNextOptions()
+
+    console.log(pokemonOptions.value)
   })
 
-  return { gameStatus, getPokemons, isLoading, getNextOptions }
+  return { gameStatus, getPokemons, isLoading, getNextOptions, randomPokemon }
 }
