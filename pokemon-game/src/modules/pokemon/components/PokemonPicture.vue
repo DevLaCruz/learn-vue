@@ -1,7 +1,7 @@
 <template>
   <section>
-    <img v-if="!showPokemon" :src="pokemonImage" alt="Pokémon" class="brightness-0 h-[200px]" />
-    <img v-else :src="pokemonImage" class="h-[200px]" />
+    <img v-if="!showPokemon" :src="pokemonImage" class="brightness-0 h-[200px]" />
+    <img v-else :src="pokemonImage" class="fade-in h-[200px]" alt="pokemon image" />
   </section>
 </template>
 
@@ -10,7 +10,7 @@ import { computed } from 'vue'
 
 interface Props {
   pokemonId: number
-  showPokemon?: false
+  showPokemon?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
